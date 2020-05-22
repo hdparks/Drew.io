@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <charge
+        v-for="charge in charges"
+        v-bind:total="charge.total">
+      </charge>
+      <span>Total: ${{total()}}</span>
+    </div>
+    <script type="text/javascript">
+
+      Vue.component('charge',{
+        props:['total'],
+        template:'<li>Item: ${{total}}</li>'
+      })
+
+
+
+      let vm = new Vue({
+        el:'#app',
+        data:{
+          charges:[{total:4},{total:5}],
+          total:function(){
+            let total = 0;
+            this.charges.forEach((item, i) => {
+              total += item.total;
+            });
+            return total;
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
