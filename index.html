@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Drew.io</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   </head>
   <body>
@@ -11,6 +11,7 @@
         v-for="charge in charges"
         v-bind:total="charge.total">
       </charge>
+      <button v-on:click="addCharge()">Add Charge</button>
       <span>Total: ${{total()}}</span>
     </div>
     <script type="text/javascript">
@@ -18,7 +19,7 @@
       Vue.component('charge',{
         props:['total'],
         template:'<li>Item: ${{total}}</li>'
-      })
+      });
 
 
 
@@ -26,6 +27,9 @@
         el:'#app',
         data:{
           charges:[{total:4},{total:5}],
+          addCharge:function(){
+            this.charges.push({total:5})
+          },
           total:function(){
             let total = 0;
             this.charges.forEach((item, i) => {
